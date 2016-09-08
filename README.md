@@ -1,1 +1,506 @@
-# omprakash.github.io
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+	<head>
+	  <title>Nalanda Education Center</title>
+	  <link type="image/x-icon" rel="icon" href="images/nec_i.ico">
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	  <style>
+		/* Remove the navbar's default margin-bottom and rounded borders */
+		.navbar {
+		  margin-bottom: 0;
+		  border-radius: 0;
+		}
+		
+		*{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		/*  custome drop down on hover */
+		.mydropdown{
+			padding: 0;
+			list-style-type: none;
+			text-align: center;
+			border-left: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+			background: indianred;
+			overflow: hidden;
+			position: absolute;
+			width: 100%;
+			height: 0px;
+			transition: height .5s ease-in-out;
+		}
+		.mydropdown li{
+			background-color: white;
+			margin-bottom:1px;
+			padding:5px;
+		}
+		.mydropdown li:last-child{
+			margin-bottom:0;
+		}
+		.navbar-nav li:hover .mydropdown{
+			height: 157px;
+			border-top: 2px solid green;
+		}
+		.navbar-right li:hover .mydropdown{
+			height: 104px;
+			border-top: 2px solid #1472d9;
+		}
+		/*---------------------------------------*/
+		.container-wraper{
+			margin-left: -15px;
+			margin-right: -15px;
+		}
+		.left-container{
+			height: 780px;
+			width: 282px;
+			padding: 0 15px;
+			float: left;
+			background: #ccc;
+		}
+		.center-container{
+			width: calc(100% - 282px);
+			height: 780px;
+			padding: 0 15px;
+			float: left;
+		}
+		
+		/* custome search */
+		/*.search_holder {
+			position: relative;
+		}
+		form#search {
+			position: absolute;
+			left: 0;
+			top: 20px;
+			width: 100%;
+			height: 45px;
+			background: #fff;
+			z-index: 8;
+		}
+		form#search button[type="submit"] {
+			position: absolute;
+			top: 7px;
+			left: 14px;
+			width: 28px;
+			height: 28px;
+			background: url(images/search_magnifier.png) no-repeat 0 0;
+			border: none;
+			cursor: pointer;
+		}
+		form#search input {
+			box-sizing: border-box;
+			width: 100%;
+			height: 100%;
+			padding-left: 65px;
+			padding-right: 45px;
+			line-height: 34px;
+			background: transparent;
+			border: none;
+			color: #000;
+			font-size: 22px;
+		}
+		form#search .search-close {
+			position: absolute;
+			top: 13px;
+			right: 15px;
+			width: 19px;
+			height: 19px;
+			background-color: transparent;
+			border: none;
+			text-indent: -9999px;
+			overflow: hidden;
+			cursor: pointer;
+		}
+		form#search .search-close:before {
+			-webkit-transform: rotate(-45deg);
+			-ms-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+		}
+		form#search .search-close:after {
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+		form#search .search-close:after, form#search .search-close:before {
+			content: '';
+			position: absolute;
+			top: 9px;
+			left: -2px;
+			width: 24px;
+			height: 2px;
+			background-color: #8b8b8b;
+		}*/
+		/* -------------------------------- */
+		
+		/* sign In card*/
+		.sign-in{
+			width: 300px;
+			height:325px;
+			border: 1px solid lightgray;
+			padding: 7px;
+			color: #387db8;
+			margin: auto;
+			background: #FFF;
+		}
+		.form-row{
+			display: block;
+			width: 100%;
+			margin-bottom: 7px;
+		}
+		.form-row input{
+			border-radius: 0;
+			height: 40px;
+		}
+		.form-row label{
+			font-weight: 500;
+			font-size: 14px;
+		}
+		.form-row span{
+			font-size: 11px;
+			float: right;
+			margin: 5px 0;
+			width: 100%;
+		}
+		.form-line{
+			width: 100%;
+			clear: both;
+			border-top: 1px solid #387db8;
+			margin: 5px 0;
+		}
+		.invalid-user{
+			border:1px solid #ccc;
+			border-radius: 0;
+			height: 30px;
+			padding: 5px 2px;
+			font-size: 12px;
+			color: #840000;
+			text-align: center;
+		}
+		.er-msg{
+			color: #840000;
+		}
+		/* ---------------------------- */
+		/* footer stylesheet */
+		footer {
+		  background-color: #555;
+		  color: white;
+		  padding: 15px;
+		}
+		footer a{
+			display: block;
+			padding: 5px 0;
+		}
+		footer a i{
+			font-size: 1.5em !important;
+			margin-right: 10px;
+			color: white;
+			vertical-align: middle;
+		}
+		.txt-align{
+			width: 150px;
+			margin: auto;
+			text-align: -webkit-auto;
+		}
+		/* ------------------------------------ */
+		.contact-card{
+			width: 150px;
+			height: 150px;
+			margin: 10px;
+			border: 1px solid rgba(150,150,150,0.3);
+			float: left;
+			
+		}
+		.contact-card:hover{
+			border: 1px solid rgba(150,150,150,1);
+			box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1), 0 4px 8px 0 rgba(0,0,0,0.2);
+		}
+		.media-list-card{
+			width: 500px;
+			height: 600px;
+			border: 1px solid rgba(110,110,210,0.5);
+			margin: auto;
+		}
+		.clear {
+			clear: both;
+			height: 0;
+			overflow: hidden;
+			float: none !important;
+			width: 0 !important;
+		}
+		.plane-line{
+			height: 0;
+			width: 100%;
+			border-top: 1px solid rgba(78,90,25,1);
+			margin: 10px auto;
+		}
+		.dotted-line{
+			height: 0;
+			width: 100%;
+			border-top: 1px dotted rgba(124,6,233,1);
+			margin: 10px auto;
+		}
+		#hide-section{
+			display: none;
+		}
+	  </style>
+	</head>
+	<body ng-controller="MainController as mainCtrl">
+		<!-- top head navbar -->
+		<!--<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Logo</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Projects</a></li>
+				<li><a href="#">Contact</a></li>
+			  </ul>
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			  </ul>
+			</div>
+		  </div>
+		</nav>--><!-- /top head navbar -->
+		<!-- 2nd navbar -->
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#" style="height:100%;padding-bottom:0;"><img src="images/nec_logo.png" alt="nec logo" /></a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar" style="padding-top:67px;">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a>
+					<ul class="mydropdown">
+						<li><a href="#">Home1</a></li>
+						<li><a href="#">Home2</a></li>
+						<li><a href="#">Home3</a></li>
+						<li><a href="#">Home4</a></li>
+						<li><a href="#">Home5</a></li>
+					</ul>
+				</li>
+				<li><a href="#">About</a>
+					<ul class="mydropdown">
+						<li><a href="#">About1</a></li>
+						<li><a href="#">About2</a></li>
+						<li><a href="#">About3</a></li>
+						<li><a href="#">About4</a></li>
+						<li><a href="#">About5</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Projects</a>
+					<ul class="mydropdown">
+						<li><a href="#">Projects1</a></li>
+						<li><a href="#">Projects2</a></li>
+						<li><a href="#">Projects3</a></li>
+						<li><a href="#">Projects4</a></li>
+						<li><a href="#">Projects5</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Contact</a>
+					<ul class="mydropdown">
+						<li><a href="#">Contact1</a></li>
+						<li><a href="#">Contact2</a></li>
+						<li><a href="#">Contact3</a></li>
+						<li><a href="#">Contact4</a></li>
+						<li><a href="#">Contact5</a></li>
+					</ul>
+				</li>
+			  </ul>
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+					<ul class="mydropdown">
+						<li><a href="#">Login As Member</a></li>
+						<li><a href="#">Login As Student</a></li>
+					</ul>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		</nav><!-- /2nd navbar -->
+	  
+		<div class="container-fluid">
+			
+			<div class="container-wraper">
+				<div class="left-container" ></div>
+				<div class="center-container">
+					<!-- custome search -->
+					<!--<div class="search_holder">
+						<form id="search" method="get" action="/search" class="">
+							<button type="submit" data-search-open="true">&nbsp;</button>
+							<input type="text" name="q" value="" placeholder="Search..." class="search_header">
+							<button type="button" class="search-close" data-search-close="">X</button>
+						</form>
+					</div>-->
+					
+					<!-- Overlay Wrapper-->
+                    <div id="myNav" class="overlay">
+						<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <div class="overlay-content">
+                                
+							<!-- existing user sign in content -->
+							<div class="sign-in">
+								<h4>Sign In</h4>
+								<form name="signInForm" novalidate>
+									<div class="form-row">
+										<div class="invalid-user"></div>
+									</div>
+									<div class="form-row">
+										<label>Email:</label>
+										 <input type="email" name="logEmail" ng-model="user_auth.logEmail" class="form-control" placeholder="*****@gmail.com" required>
+										<span class="er-msg" ng-show="signInForm.logEmail.$touched && signInForm.logEmail.$error.required">**Please Enter Valid Email Address</span>
+									</div>
+									<div class="form-row">
+										<label>Password:</label>
+										<input type="password" name="logPsw" ng-model="user_auth.logPsw" class="form-control" placeholder="*******" required>
+										<span class="er-msg" ng-show="signInForm.logPsw.$touched && signInForm.logPsw.$error.required">**Please Enter Valid Password</span>
+										<span style="text-align: right;"><a href="#">forget password</a></span>
+									</div>
+									<div class="form-line"></div>
+									<button type="submit" class="btn btn-primary" ng-disabled="" ng-click="signIn(user_auth)">Submit</button>
+								</form>
+							</div><!-- /existing user sign in content --> 
+                                <!--<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>-->
+                        </div>
+                    </div><!-- /Overlay wrapper-->
+						<!-- contact card -->
+					<!--<section style="padding:30px;text-align:center;margin:auto;width:910px;" class="clearfix">
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+						<div class="contact-card"></div>
+					</section>--><!-- /contact card-->
+					<!--<section style="padding:30px;text-align:center;margin:auto;width:910px;" class="clearfix">
+						<div class="media">
+							<div class="media-heading">
+								<h4>Media Heading</h4>
+							</div>
+						</div>
+						<div class="plane-line"></div>
+						<div class="media">
+						  <a class="media-left" href="#">
+							<img class="media-object" src="images/im1.jpg" alt="image" style="width:150px">
+						  </a>
+						  <div class="media-body" style="text-align:-webkit-auto">
+							<h4 class="media-heading">Media heading</h4>
+							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+						  </div>
+						</div>
+						
+						<div class="dotted-line"></div>
+						
+						<div class="media">
+						  <a class="media-left" href="#">
+							<img class="media-object" src="images/im1.jpg" alt="image" style="width:150px">
+						  </a>
+						  <div class="media-body" style="text-align:-webkit-auto">
+							<h4 class="media-heading">Media heading</h4>
+							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+						  </div>
+						</div>
+						
+						<div class="dotted-line"></div>
+					</section>-->
+					
+					<section id="hide-section" style="padding:30px;text-align:center;margin:auto;width:910px;" class="clearfix">
+						<div class="panel panel-default">
+							<div class="panel-heading">subscribe this website</div>
+							<div class="panel-body" style="position:relative;">
+								<form>
+									<input type="email" class="form-control" placeholder="Enter Email" style="float:left;width:85%;"/>
+									<p style="clear:both;display:none;">** this field is required</p>
+									<button type="submit" class="btn btn-info" style="position:absolute;top:15px;right:15px;">subscribe</button>
+									<i class="fa fa-times-circle-o" style="position:absolute;top:-56px;right:-15px;font-size:1.5em;cursor:pointer"></i>
+								</form>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			
+			
+		</div>
+
+		<footer class="container-fluid text-center">
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="txt-align">
+						<h4>About Us</h4>
+						<a href="#">Who We Are</a>
+						<a href="#">Our Vision</a>
+						<a href="#">Our Mission</a>
+						<a href="#">Contact us</a>
+						<a href="#">Privacy Policy</a>
+						<a href="#">Terms of use</a>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="txt-align">
+						<h4>Partnership</h4>
+						<a href="#"></a>
+						<a href="#"></a>
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="txt-align">
+						<h4>Find us</h4>
+						<a href="#"><i class="fa fa-facebook-square"></i>Facebook</a>
+						<a href="#"><i class="fa fa-twitter-square"></i>Twitter</a>
+						<a href="#"><i class="fa fa-google-plus-square"></i>Google+</a>
+						<a href="#"><i class="fa fa-envelope-square"></i>Gmail</a>
+						<a href="#"><i class="fa fa-whatsapp" style="color: green"></i>Whats app</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script>
+			angular.module("demoApp", []).
+			controller("MainController",['$scope', function(scope){
+				//alert("connected");
+				
+			}])
+			
+		</script>
+		<script>
+            
+            
+            // script for overlay:- activated click on sign In
+            function openNav() {
+                document.getElementById("myNav").style.height = "100%";
+            }
+
+            function closeNav() {
+                document.getElementById("myNav").style.height = "0%";
+            }
+        </script>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		
+		<script src="js/bootstrap.js"></script>
+		<script src=""></script>
+	</body>
+</html>
+
